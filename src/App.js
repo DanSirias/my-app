@@ -16,9 +16,6 @@ function App() {
 
   const [showText, setShowText] = useState(false); 
 
-  useEffect(() => {
-    console.log('Component Mounted');
-  });
 
   return (
     <div className='App'>
