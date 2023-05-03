@@ -1,93 +1,48 @@
 //ALL OF THE DISPLAY CODE WILL EXIST IN THIS FILE
 //JSX means is a function that send html to the main page
 //Component returns HTML must start with CAPS
-
 import './App.css';
 //import {User} from './User'; 
-import { useState } from "react"; 
+import { useState , useEffect, Component} from "react"; 
+import { Text } from "./Text"; 
 import Toast from '../node_modules/react-bootstrap/Toast';
 import Container from '../node_modules/react-bootstrap/Container';
 import Button from '../node_modules/react-bootstrap/Button';
-
+import {Task} from './task'; 
 //Ternary Operator 
 //age >= 18 ? console.log("HEEH") : console.log("NO") // (? is if) (: is else) (&& if something is true)
 
-//States
-// Is a variable that holds data (string, numeric, boleen, )
-
 function App() {
 
-  //Build the Array with Inputs from setNewTask
-  const [todoList, setTodoList] = useState([]);
+  const [showText, setShowText] = useState(false); 
 
-  //Get the input with another useState while User types
-  const [newTask, setNewTask] = useState('');
-
-  const handleChange = (e) => {
-    setNewTask(e.target.value); //Obtains input from field and sends value to newTask useState
-  };
-
-  //... is adds existing array with new items
-  const addTask = () => {
-  const task = {
-      id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1, 
-      taskName: newTask,
-    };
-
-
-    // const newTodoList = [...todoList, newTask]; //combines new input task with Array
-    // setTodoList(newTodoList); //Updates the useState with the combines Tasks
-    setTodoList([...todoList, task]); //Updates the useState with the combines Tasks
-  };
-
-  const deleteTask = (id) => {
-    //const newTodoList = todoList.filter((task) => task !== taskName) //use instead of if/else function
-    setTodoList(todoList.filter((task) => task.id !== id)) //shorten version
-  };
+  useEffect(() => {
+    console.log('Component Mounted');
+  });
 
   return (
-
-    <div className="App">
-      <>
-      <Container className="container-fluid mb-3 bg-secondary">
-      <h1 className="header">My Todo List</h1>
-      <br></br>
-      </Container>
-
-        <div className='addTask'>
-            <input onChange={handleChange}/>
-            <Button className='btn-primary' onClick={addTask}>Show Toast</Button>
-        </div>
-
-        <div className='list'>
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-              {todoList.map((task) => {
-                return <tr>
-                  <th scope="row">{task.id}</th>
-                  <td>{task.taskName}</td>
-                  <td><Button className="btn-danger" onClick={()=>deleteTask(task.id)}>x</Button></td>{/* Add an arrow function when using params in func */}
-                </tr>
-              })}
-            </tbody>
-          </table>
-        </div>   
-      </>
+    <div className='App'>
+      <Button className='btn-primary' onClick={() => {setShowText(!showText)}}> Show Text </Button>
+    {showText && <Text />}
     </div>
 
-  )
-}
+  ); 
+};
 
 export default App;
 
+//Life cycle of component 
+/* 
+MOUNTING - start appearing
+UPDATING - changing UI
+UNMOUNTING - stop appearing (Efficient)
 
+
+useEffect: 
+
+
+
+*/
 
 
 
